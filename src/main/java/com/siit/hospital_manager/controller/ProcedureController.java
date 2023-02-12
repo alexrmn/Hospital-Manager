@@ -21,13 +21,13 @@ public class ProcedureController {
     @GetMapping("/createProcedure")
     public String createProcedure(Model model){
         model.addAttribute("procedure",new Procedure());
-        return "/procedure/createProcedure";
+        return "procedure/createProcedure";
     }
 
     @GetMapping("/viewAllProcedure")
     public String viewAllProcedure(Model model){
         model.addAttribute("procedures",procedureRepository.findAll());
-        return "/procedure/viewAllProcedure";
+        return "procedure/viewAllProcedure";
     }
 
     @PostMapping("/submitCreateProcedure")
@@ -36,7 +36,7 @@ public class ProcedureController {
             procedureService.createProcedure(name);
             return "redirect:/procedure/viewAllProcedure";
         }catch (ResponseStatusException e){
-            return "/entityExistsError";
+            return "entityExistsError";
         }
     }
 

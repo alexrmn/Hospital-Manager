@@ -47,7 +47,7 @@ public class AppointmentController {
         model.addAttribute("appointmentDiagnoses", appointmentService.findById(apId).getDiagnoses());
         model.addAttribute("appointmentProcedures", appointmentService.findById(apId).getProcedures());
         model.addAttribute("appointmentMedications", appointmentService.findById(apId).getMedications());
-        return "/appointment/appointmentDetails/appointmentsDetails";
+        return "appointment/appointmentDetails/appointmentsDetails";
     }
 
 
@@ -64,7 +64,7 @@ public class AppointmentController {
                 .orElseThrow(() -> new EntityNotFoundException("Specialty not found"));
         model.addAttribute("doctors", doctorService.findAllBySpecialty(specialty));
         model.addAttribute("appointment", CreateAppointmentDto.builder().build());
-        return "/appointment/createAppointment";
+        return "appointment/createAppointment";
     }
 
     @PostMapping("/submitCreateAppointmentForm")
@@ -76,13 +76,13 @@ public class AppointmentController {
         emailSender.sendAppointmentConfirmationEmail(userEmail, "Appointment Confirmation",
                 "Your appointment has been confirmed we wait you at: " + createAppointmentDto.getDate());
         appointmentService.save(createAppointmentDto);
-        return "/appointment/appointmentCreatedSuccessfully";
+        return "appointment/appointmentCreatedSuccessfully";
     }
     @GetMapping("/findAllByDoctor")
     public String findAllByDoctor(Model model, Principal principal){
         List<AppointmentDto> appointments = appointmentService.findAllByDoctor(principal.getName());
         model.addAttribute("doctorAppointments", appointments);
-        return "/appointment/viewAppointmentsByDoctor";
+        return "appointment/viewAppointmentsByDoctor";
     }
 
     @GetMapping("/{appointmentId}")

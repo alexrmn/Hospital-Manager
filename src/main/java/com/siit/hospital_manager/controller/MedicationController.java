@@ -22,14 +22,14 @@ public class MedicationController {
     @GetMapping("/viewAllMedication")
     public String viewAllMedication(Model model){
         model.addAttribute("medications",medicationRepository.findAll());
-        return "/medication/viewAllMedication";
+        return "medication/viewAllMedication";
     }
 
 
     @GetMapping("/createMedication")
     public String createMedicationView(Model model){
         model.addAttribute("medication",new Medication());
-        return"/medication/createMedication";
+        return"medication/createMedication";
     }
 
 

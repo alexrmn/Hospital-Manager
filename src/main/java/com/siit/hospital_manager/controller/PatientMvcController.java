@@ -31,19 +31,19 @@ public class PatientMvcController {
     @GetMapping("/create")
     public String createPatientPage(Model model){
         model.addAttribute("patient", CreatePatientDto.builder().build());
-        return "/patient/createPatient";
+        return "patient/createPatient";
     }
 
     @PostMapping("/submitCreatePatientForm")
     public String submitCreatePatientForm (@Valid CreatePatientDto createPatientDto, BindingResult bindingResult , RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
-            return "/validationError";
+            return "validationError";
         }
         try {
             patientService.createPatient(createPatientDto);
         }
         catch (ResponseStatusException exception){
-           return "/entityExistsError";
+           return "entityExistsError";
         }
         redirectAttributes.addFlashAttribute("successMessage", "Account created successfully");
         return "redirect:/login";

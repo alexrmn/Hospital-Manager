@@ -23,13 +23,13 @@ public class SpecialtyController {
     @GetMapping("/{specialtyId}")
     public String showSpecialtyPage(@PathVariable Integer specialtyId, Model model) {
         model.addAttribute("specialty", specialtyService.findById(specialtyId));
-        return "/specialty/showSpecialty";
+        return "specialty/showSpecialty";
     }
 
     @GetMapping("/createSpecialty")
     public String createProcedure(Model model){
         model.addAttribute("specialty",new Specialty());
-        return "/specialty/createSpecialty";
+        return "specialty/createSpecialty";
     }
 
     @PostMapping("/submitCreateSpecialty")
@@ -41,7 +41,7 @@ public class SpecialtyController {
     @GetMapping("/viewAllSpecialties")
     public String viewAllProcedure(Model model){
         model.addAttribute("specialties",specialtyService.findAll());
-        return "/specialty/viewAllSpecialties";
+        return "specialty/viewAllSpecialties";
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
