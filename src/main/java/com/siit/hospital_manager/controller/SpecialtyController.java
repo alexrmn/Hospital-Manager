@@ -1,13 +1,13 @@
 package com.siit.hospital_manager.controller;
 
+import com.siit.hospital_manager.model.Procedure;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.service.SpecialtyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,4 +25,21 @@ public class SpecialtyController {
         return "/specialty/showSpecialty";
     }
 
+    @GetMapping("/createSpecialty")
+    public String createProcedure(Model model){
+        model.addAttribute("specialty",new Specialty());
+        return "/specialty/createSpecialty";
+    }
+
+    @PostMapping("/submitCreateSpecialty")
+    public String createProcedure(@ModelAttribute Specialty specialty){
+        specialtyService.save(specialty);
+        return "redirect:/specialty/viewAllSpecialties";
+    }
+
+    @GetMapping("/viewAllSpecialties")
+    public String viewAllProcedure(Model model){
+        model.addAttribute("specialties",specialtyService.findAll());
+        return "/specialty/viewAllSpecialties";
+    }
 }

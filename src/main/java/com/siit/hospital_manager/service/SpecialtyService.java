@@ -22,4 +22,8 @@ public class SpecialtyService {
         return specialtyRepository.findById(specialtyId)
                 .orElseThrow(() -> new EntityNotFoundException("Specialty not found"));
     }
+
+    public void save(Specialty specialty) {
+        specialtyRepository.save(specialty);
+    }
 }
