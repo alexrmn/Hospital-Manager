@@ -38,8 +38,9 @@
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="date">Date:</label>
-                <input class="form-control" type="datetime-local" id="date" th:field="*{date}"/>
+                <input class="form-control" type="datetime-local" id="date" th:field="*{date}" required />
             </div>
+
             <div class="w-75 p-3 text-end">
                 <input type="submit" value="Submit" class="btn btn-primary"/>
             </div>
@@ -52,6 +53,23 @@
 
     </div>
 </div>
+
+<script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+        var date = document.getElementById("date").value;
+        if (!date) {
+            alert("Date is required.");
+            event.preventDefault();
+        } else {
+            var enteredDate = new Date(date);
+            var currentDate = new Date();
+            if (enteredDate < currentDate) {
+                alert("Date must be in the present or future.");
+                event.preventDefault();
+            }
+        }
+    });
+</script>
 <style>
 
     body {
@@ -67,8 +85,6 @@
         font-weight: bold;
         width: 50%;
     }
-
-
 
 </style>
 </body>

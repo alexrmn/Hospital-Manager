@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CreateAppointmentDto {
     @FutureOrPresent
+    @NotNull
     private LocalDateTime date;
 
     private Patient patient;

@@ -7,6 +7,7 @@ import com.siit.hospital_manager.model.dto.CreateAppointmentDto;
 import com.siit.hospital_manager.repository.SpecialtyRepository;
 import com.siit.hospital_manager.service.*;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -34,7 +35,7 @@ public class AppointmentController {
 
     private final EmailSender emailSender;
 
-    @GetMapping("/findAllByPatient")
+    @GetMapping("/viewAll")
     public String findAllByPatient(Model model, Principal principal) {
         List<AppointmentDto> appointments = appointmentService.findAllByUserName(principal.getName());
         model.addAttribute("appointments", appointments);
@@ -68,7 +69,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/submitCreateAppointmentForm")
-    public String submitCreateAppointmentForm(CreateAppointmentDto createAppointmentDto, BindingResult bindingResult, Authentication authentication) {
+    public String submitCreateAppointmentForm(@Valid CreateAppointmentDto createAppointmentDto, BindingResult bindingResult, Authentication authentication) {
         MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
         String username = myUserDetails.getUsername();
         Patient patient = patientService.findByUsername(username);
