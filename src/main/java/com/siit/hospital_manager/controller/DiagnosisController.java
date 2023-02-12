@@ -29,13 +29,13 @@ public class DiagnosisController {
     public String viewDiagnoses(Model model){
         List<Diagnosis> diagnosisList = diagnosisRepository.findAll();
         model.addAttribute("diagnosis",diagnosisList);
-        return "/diagnose/viewAllDiagnoses";
+        return "diagnose/viewAllDiagnoses";
     }
 
     @GetMapping("/createDiagnose")
     public String createDiagnoseView(Model model){
         model.addAttribute("diagnose", new Diagnosis());
-        return "/diagnose/createDiagnose";
+        return "diagnose/createDiagnose";
     }
 
      @PostMapping("/submitCreateDiagnose")
@@ -48,7 +48,7 @@ public class DiagnosisController {
              return "redirect:/diagnose/viewAllDiagnoses";
          } catch (ResponseStatusException e)
          {
-             return "/entityExistsError";
+             return "entityExistsError";
          }
      }
 
@@ -61,7 +61,7 @@ public class DiagnosisController {
     @GetMapping("/viewPatientDiagnosis")
     public String viewPatientDiagnosis(Model model, @PathVariable Integer id){
         model.addAttribute("patientDiagnosis", diagnosisService.findById(id));
-        return "/diagnose/viewPatientDiagnosis";
+        return "diagnose/viewPatientDiagnosis";
     }
 
 }

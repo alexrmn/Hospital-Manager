@@ -14,27 +14,27 @@
         <form th:object="${patient}" th:action="@{/mvc/patient/submitCreatePatientForm}" method="post">
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="userName">UserName:</label>
-                <input class="form-control" type="text" id="userName" th:field="*{userName}"/>
+                <input class="form-control" type="text" id="userName" th:field="*{userName}" required/>
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="userName">Password:</label>
-                <input class="form-control" type="password" id="password" th:field="*{password}"/>
+                <input class="form-control" type="password" id="password" th:field="*{password}" required/>
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="name">Name:</label>
-                <input class="form-control" type="text" id="name" th:field="*{name}"/>
+                <input class="form-control" type="text" id="name" th:field="*{name}" required/>
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="age">Age:</label>
-                <input class="form-control" type="number" id="age" th:field="*{age}"/>
+                <input class="form-control" type="number" id="age" th:field="*{age}" required/>
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="phoneNumber">Phone number:</label>
-                <input class="form-control" type="text" id="phoneNumber" th:field="*{phoneNumber}"/>
+                <input class="form-control" type="text" id="phoneNumber" th:field="*{phoneNumber}" required/>
             </div>
             <div class="mb-0 w-75 p-1">
                 <label class="form-label" for="email">Email:</label>
-                <input class="form-control" type="email" id="email" th:field="*{email}"/>
+                <input class="form-control" type="email" id="email" th:field="*{email}" required/>
             </div>
             <div class="w-75 p-3 text-end">
                 <input type="submit" value="Submit" class="btn btn-primary "/>

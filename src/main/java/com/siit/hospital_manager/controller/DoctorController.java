@@ -24,14 +24,14 @@ public class DoctorController {
     public String viewAll(Model model){
         List<DoctorDto> doctors = doctorService.findAll();
         model.addAttribute("doctors", doctors);
-        return "/doctor/viewAll";
+        return "doctor/viewAll";
     }
 
     @GetMapping("/createDoctor")
     public String createDoctor(Model model){
         model.addAttribute("specialities",specialtyRepository.findAll());
         model.addAttribute("doctor", CreateDoctorDto.builder().build());
-        return "/doctor/createDoctor";
+        return "doctor/createDoctor";
     }
 
     @PostMapping("/submitCreateDoctorForm")

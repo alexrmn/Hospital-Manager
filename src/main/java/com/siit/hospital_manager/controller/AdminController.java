@@ -25,7 +25,7 @@ public class AdminController {
     @GetMapping("/viewAllAdmins")
     public String viewAllAdmins(Model model){
         model.addAttribute("admins",adminRepository.findAll());
-        return "/admin/viewAllAdmins";
+        return "admin/viewAllAdmins";
     }
 
 
@@ -33,7 +33,7 @@ public class AdminController {
     @GetMapping("/createAdmin")
     public String createAdmin(Model model){
         model.addAttribute("admin", CreateAdminDto.builder().build());
-        return "/admin/createAdmin";
+        return "admin/createAdmin";
     }
 
     @PostMapping("/submitCreateAdmin")
@@ -43,7 +43,7 @@ public class AdminController {
        }catch (ResponseStatusException e){
            return "/entityExistsError";
        }
-        return "/index";
+        return "index";
     }
 
     @DeleteMapping("/{id}")

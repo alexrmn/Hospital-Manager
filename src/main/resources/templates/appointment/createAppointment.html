@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,51 +26,154 @@
         </ul>
     </div>
 </nav>
-<div class="w-50 mx-auto content-between-l">
-    <br/>
-    <h2 class="h2">Create a new appointment</h2>
-    <div>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbCSlk6nfF3lHhqikqqD3fPZdYjnB27FXzfw&usqp=CAU" width="250px" height="100px">
+
         <form th:object="${appointment}" th:action="@{/appointment/submitCreateAppointmentForm}" method="post">
-            <div class="mb-0 w-75 p-1">
-                <label class="form-label" for="doctor">Doctor:</label>
+            <div class="formbold-form-title">
+                <h2 class="">Create your appointment</h2>
+                <p>
+                  Select doctor date and time for your appointment.
+                </p>
+            </div>
+            <div class="formbold-mb-3">
+                <label style="text-align: center" for="doctor" class="formbold-form-label">
+                   Doctor
+                </label>
                 <select class="form-control" id="doctor" th:field="*{doctor}">
                     <option th:each="doctor : ${doctors}" th:value="${doctor.id}" th:text="'Dr. ' +${doctor.name}"></option>
                 </select>
             </div>
-            <div class="mb-0 w-75 p-1">
-                <label class="form-label" for="date">Date:</label>
+
+            <div class="formbold-mb-3">
+                <label style="text-align: center" for="date" class="formbold-form-label">
+                    Date
+                </label>
                 <input class="form-control" type="datetime-local" id="date" th:field="*{date}"/>
             </div>
-            <div class="w-75 p-3 text-end">
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-            </div>
-            <div th:if="${#fields.hasAnyErrors()}">
-                <ul>
-                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
-                </ul>
-            </div>
-        </form>
 
+
+            <button class="formbold-btn">Create Appointment</button>
+        </form>
     </div>
 </div>
-<style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script>
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     body {
-        background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Inter', sans-serif;
+    }
+    .form-control{
+        height: 25px;
+        text-align: center;
+    }
+
+    .formbold-mb-3 {
+        margin-bottom: 15px;
+    }
+    .formbold-mb-3 select{
+        height: 40px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #supportCheckbox:checked ~ div span {
+        opacity: 1;
+    }
+
+    .formbold-main-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
     }
 
 
-    .h2 {
-        text-align: center;
-        margin-top: 40px;
-        border-radius: 20px;
-        font-weight: bold;
+    .formbold-form-wrapper {
+        margin: 0 auto;
+        max-width: 570px;
+        width: 100%;
+        background: white;
+        padding: 40px;
+    }
+
+
+
+    .formbold-form-title {
+        margin-bottom: 30px;
+    }
+    .formbold-form-title h2 {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 34px;
+        color: #07074d;
+    }
+    .formbold-form-title p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #536387;
+        margin-top: 12px;
+    }
+    .form-control{
+        width: 100%;
+        height: 25px;
+        font-size: 19px;
+    }
+
+    .formbold-input-flex > div {
         width: 50%;
     }
 
 
+    .formbold-form-label {
+        color: #536387;
+        font-size: 25px;
+        line-height: 24px;
+        display: block;
+        margin-bottom: 10px;
+    }
 
+
+    .formbold-checkbox-label a {
+        margin-left: 5px;
+        color: #6a64f1;
+    }
+
+
+    .formbold-btn {
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 14px 25px;
+        border: none;
+        font-weight: 500;
+        background-color: #6a64f1;
+        color: white;
+        cursor: pointer;
+        margin-top: 25px;
+    }
+    .formbold-btn:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
 </style>
+
+
 </body>
 </html>

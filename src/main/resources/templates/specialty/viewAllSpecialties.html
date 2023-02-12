@@ -53,13 +53,13 @@
       <td colspan="2">No medications yet</td>
     </tr>
     <tr style="text-align: center" th:each="specialty : ${specialties}">
-      <td style="text-align: center" class="procedureId" th:text="${specialty.id}">Id</td>
+      <td style="text-align: center" class="specialityId" th:text="${specialty.id}">Id</td>
       <td style="text-align: center" th:text="${specialty.name}">Specialty Name</td>
       <td style="text-align: center" th:text="${specialty.description}">Specialty Description</td>
       <td style="text-align: center" th:text="${specialty.imageURL}">Specialty Image URL</td>
 
       <td>
-        <button class="btn btn-danger delete-procedure-button" type="button" onclick="showDeleteConfirmation()">
+        <button class="btn btn-danger delete-speciality-button" type="button" onclick="showDeleteConfirmation()">
           <i class="fas fa-trash-alt"></i> Delete
         </button>
       </td>
@@ -69,40 +69,22 @@
 </div>
 
 <script>
-  const deleteButtons = document.querySelectorAll('.delete-procedure-button');
+  const deleteButtons = document.querySelectorAll('.delete-speciality-button');
   deleteButtons.forEach(function(deleteButton) {
     deleteButton.addEventListener("click", function() {
-      const procedureId = deleteButton.parentNode.parentNode.querySelector(".procedureId").textContent;
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'This action cannot be undone.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Delete',
-        cancelButtonText: 'Cancel'
-      })
-              .then((willDelete) => {
-                if (willDelete.value) {
-                  fetch('/procedure/' + procedureId, {
-                    method: 'DELETE'
-                  }).then(function(response) {
-                    if (response.ok) {
-                      window.location.href = '/procedure/viewAllProcedure';
-                      // Display a success alert
-                      Swal.fire("Procedure deleted successfully!", {
-                        icon: "success",
-                      });
-                    } else {
-                      // Display an error alert
-                      Swal.fire("Error deleting procedure!", {
-                        icon: "error",
-                      });
-                    }
-                  });
-                }
-              });
+      if (confirm("Are you sure?")) {
+        const specialityId = this.parentNode.parentNode.querySelector(".specialityId").textContent;
+        fetch('/specialty/' + specialityId, {
+          method: 'DELETE'
+        }).then(function(response) {
+          if (response.ok) {
+            alert("Specialty deleted successfully");
+            location.reload(); // Reload the page to update the table
+          } else {
+            alert("Error deleting speciality");
+          }
+        });
+      }
     });
   });
 </script>
