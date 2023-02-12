@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.siit.hospital_manager.model.dto.AppointmentDto;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class Appointment {
     @JsonIgnore
     private Specialty specialty;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(name = "appointment_diagnosis",
             joinColumns = @JoinColumn(name = "appointment_id"),
             inverseJoinColumns = @JoinColumn(name = "diagnosis_id"))
@@ -79,6 +80,11 @@ public class Appointment {
             this.diagnoses = new HashSet<>();
         }
         this.diagnoses.add(diagnosis);
+    }
+
+    public void removeDiagnosis(Diagnosis diagnosis){
+        this.diagnoses.remove(diagnosis);
+        diagnosis.getAppointments().remove(this);
     }
 
     public void addProcedure(Procedure procedure) {

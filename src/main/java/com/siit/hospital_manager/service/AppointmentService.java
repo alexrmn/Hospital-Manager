@@ -68,6 +68,10 @@ public class AppointmentService {
         Appointment appointment = appointmentsRepository.findAppointmentByIdAndPatient(id, patient).orElseThrow(
                 () -> new BusinessException(HttpStatus.NOT_FOUND, "Appointment not found"));
 
+        appointment.setDiagnoses(null);
+        appointment.setMedications(null);
+        appointment.setProcedures(null);
+
         appointmentsRepository.deleteByIdNativeQuery(appointment.getId());
     }
 
