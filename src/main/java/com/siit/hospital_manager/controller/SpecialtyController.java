@@ -4,6 +4,7 @@ import com.siit.hospital_manager.model.Procedure;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.service.SpecialtyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,4 +43,12 @@ public class SpecialtyController {
         model.addAttribute("specialties",specialtyService.findAll());
         return "/specialty/viewAllSpecialties";
     }
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deleteDoctorById(Model model, @PathVariable Integer id){
+        specialtyService.deleteSpecialityByID(id);
+    }
+
+
+
 }
