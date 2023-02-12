@@ -151,6 +151,11 @@ public class AppointmentController {
     public String saveSummary(@PathVariable Integer appointmentId, @ModelAttribute Appointment editedAppointment) {
         Appointment appointment = appointmentService.findById(appointmentId);
         appointment.setSummary(editedAppointment.getSummary());
+        String username=appointment.getPatient().getUserName();
+        Patient patient = patientService.findByUsername(username);
+        String userEmail = patient != null ? patient.getEmail() : null;
+        emailSender.sendAppointmentConfirmationEmail(userEmail, "Appointment Details",
+                "Your appointment details have been updated you can watch now the details.");
         appointmentService.save(appointment);
         return "redirect:/appointment/findAllByDoctor";
     }
