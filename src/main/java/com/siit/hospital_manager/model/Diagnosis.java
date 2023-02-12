@@ -1,6 +1,7 @@
 package com.siit.hospital_manager.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
@@ -19,6 +20,7 @@ public class Diagnosis {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     private String name;
 
     @ManyToMany(mappedBy = "diagnoses")

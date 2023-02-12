@@ -8,6 +8,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 
 //@Component
 @RequiredArgsConstructor
@@ -21,6 +25,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private final DiagnosisRepository diagnosisRepository;
     private final MedicationRepository medicationRepository;
     private final AppointmentsRepository appointmentsRepository;
+    private final AdminRepository adminRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -34,6 +39,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                         "arrhythmias, congenital heart defects, and hypertension, among others. The field of cardiology also " +
                         "includes non-invasive and invasive procedures for diagnosing and treating heart conditions, " +
                         "such as stress tests, electrocardiograms, and angioplasties.")
+                .imageURL("https://imageup.me/images/bdf51083-bc50-4e77-aa53-1c88a0102d55.png")
                 .build();
         Specialty rheumatology = Specialty.builder()
                 .id(2)
@@ -44,6 +50,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                         "Rheumatologists use a combination of physical exams, lab tests, imaging studies, " +
                         "and patient history to diagnose and manage these conditions, which can include arthritis, lupus, " +
                         "fibromyalgia, and gout, among others.")
+                .imageURL("https://imageup.me/images/ea28d8e8-52f1-46c3-8683-0d3a0c8a7ba5.png")
                 .build();
 
         specialtyRepository.save(cardiology);
@@ -97,6 +104,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         patientRepository.save(patient1);
         patientRepository.save(patient2);
 
+        //creating admin
+        Admin admin = Admin.builder()
+                .userName("admin")
+                .password(encoder.encode("admin"))
+                .isActive(true)
+                .roles("ROLE_ADMIN")
+                .build();
+        adminRepository.save(admin);
+
+
         //creating procedures
         Procedure eco = Procedure.builder()
                 .name("Echocardiography")
@@ -114,7 +131,12 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .name("Hypertension")
                 .build();
 
+        Diagnosis diagnosis2 = Diagnosis.builder()
+                .name("Lupus")
+                .build();
+
         diagnosisRepository.save(diagnosis1);
+        diagnosisRepository.save(diagnosis2);
 
         //creating Medications
         Medication enalapril = Medication.builder()
@@ -125,6 +147,16 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
 
         //creating appointments
+        Set<Diagnosis> diagnosisSet = new HashSet<>();
+        diagnosisSet.add(diagnosis1);
+        diagnosisSet.add(diagnosis2);
+
+        Appointment appointment = Appointment.builder()
+                .date(LocalDateTime.now())
+                .patient(patient1)
+                .doctor(doctor1)
+                .diagnoses(diagnosisSet)
+                .build();
 
 
     }

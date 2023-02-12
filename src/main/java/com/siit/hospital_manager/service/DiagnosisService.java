@@ -4,6 +4,7 @@ import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Appointment;
 import com.siit.hospital_manager.model.Diagnosis;
 import com.siit.hospital_manager.model.Medication;
+import com.siit.hospital_manager.repository.AppointmentsRepository;
 import com.siit.hospital_manager.repository.DiagnosisRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class DiagnosisService {
 
     private final DiagnosisRepository diagnosisRepository;
+    private final AppointmentsRepository appointmentsRepository;
 
     public void createDiagnose(String name){
         diagnosisRepository.findByName(name).ifPresent(diagnosis -> { throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Diagnose Already Exist");
@@ -35,6 +37,12 @@ public class DiagnosisService {
     public void deleteDiagnose(Integer id){
         Diagnosis diagnosis = diagnosisRepository.findById(id).orElseThrow(
                 () -> new BusinessException(HttpStatus.NOT_FOUND, "Appointment not found"));
+
+        appointmentsRepository.findAll()
+                        .forEach(appointment -> {
+                            if (appointment.getDiagnoses().contains(diagnosis))
+                                appointment.removeDiagnosis(diagnosis);
+                        });
 
         diagnosisRepository.deleteByIdNativeQuery(diagnosis.getId());
     }

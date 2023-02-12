@@ -2,6 +2,7 @@ package com.siit.hospital_manager.service;
 
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Procedure;
+import com.siit.hospital_manager.repository.AppointmentsRepository;
 import com.siit.hospital_manager.repository.ProcedureRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class ProcedureService {
 
 
     private final ProcedureRepository procedureRepository;
+    private final AppointmentsRepository appointmentsRepository;
 
 
     public void createProcedure(String name){
@@ -32,6 +34,13 @@ public class ProcedureService {
      @Transactional
     public void deleteProcedure(Integer id){
         Procedure procedure = procedureRepository.findById(id).orElseThrow(()->new BusinessException(HttpStatus.NOT_FOUND,"Procedure not found"));
+
+         appointmentsRepository.findAll()
+                 .forEach(appointment -> {
+                     if (appointment.getProcedures().contains(procedure))
+                         appointment.removeProcedure(procedure);
+                 });
+
         procedureRepository.deleteByIdNativeQuery(procedure.getId());
     }
 
