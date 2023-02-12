@@ -36,10 +36,10 @@
 <h2 class="h2"> Appointments list</h2>
 
 <!--<table border="1" class="table table-striped">-->
-<div style="width: 90%; overflow-x: auto;">
-    <table class="table" style="width: 40%;">
-    <thead>
-    <tr>
+<!--<div style="width: 90%; overflow-x: auto; border-radius: 20px">-->
+    <table class="table" style="width: 65%; border-radius: 10px;">
+        <thead class="thead-dark" style="border-radius: 25px">
+    <tr style="border-radius: 25px">
         <th style="text-align: center"> Id</th>
         <th style="text-align: center"> Date</th>
         <th style="text-align: center"> Doctor name</th>
@@ -117,9 +117,30 @@
         background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
         font-family: 'Roboto', sans-serif;
     }
-    .table {
-        background: #dddddd;
+
+    table {
+        border-collapse:collapse;
+        border:none;
+        border-radius:10px;
+        margin-top: 25px;
+        margin-left: 40vh;
+        background: rgba(255, 255, 255, 0.95);
     }
+
+    td, th {
+        border-left:none;
+        border-top:none;
+    }
+
+    th {
+        background-color: blue;
+        border-top: none;
+    }
+
+    td:first-child, th:first-child {
+        border-left: none;
+    }
+
     .delete-appointment-button {
         background-color: rgba(211, 23, 23, 0.74);
        text-color: white;
@@ -138,12 +159,6 @@
          margin-left: 25%;
     }
 
-    .table {
-        margin-top: 25px;
-        margin-left: 65vh;
-        border: 1px solid #ffffff;
-        border-collapse: collapse;
-    }
 
 
 

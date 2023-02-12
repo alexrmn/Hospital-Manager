@@ -34,14 +34,13 @@
 </nav>
 <div class="bg" style="background-image: url('https://images.pexels.com/photos/162583/work-workplace-office-computer-162583.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');  background-size: cover; background-position: center center; height: 100vh; width: 100%;">
 <h2 class="h2"> Appointments list</h2>
-<div style="width: 90%; overflow-x: auto;">
-    <table class="table" style="width: 40%;">
-        <thead>
+    <table class="table" style="width: 65%; border-radius: 10px;">
+        <thead class="thead-dark" style="border-radius: 25px">
         <tr>
             <th style="text-align: center"> Id</th>
             <th style="text-align: center"> Date</th>
             <th style="text-align: center"> Patient name</th>
-            <th style="text-align: center"> </th>
+            <th style="text-align: center"> Appointment Details </th>
         </tr>
         </thead>
         <tbody>
@@ -60,9 +59,7 @@
     </table>
 </div>
 
-<p></p>
 
-</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
@@ -74,10 +71,6 @@
         background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
         font-family: 'Roboto', sans-serif;
     }
-    .table {
-        background: #dddddd;
-    }
-
       .h2 {
           text-align: center;
            padding-top: 40px;
@@ -87,11 +80,26 @@
          margin-left: 25%;
     }
 
-    .table {
+    table {
+        border-collapse:collapse;
+        border:none;
+        border-radius:25px;
         margin-top: 25px;
-        margin-left: 65vh;
-        border: 1px solid #ffffff;
-        border-collapse: collapse;
+        margin-left: 40vh;
+        background-color: #FFFFFFF2;
+    }
+
+    td, th {
+        border-left:none;
+        border-top:none;
+    }
+
+    th {
+        border-top: none;
+    }
+
+    td:first-child, th:first-child {
+        border-left: none;
     }
 
 

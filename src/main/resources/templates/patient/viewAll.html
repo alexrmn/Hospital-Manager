@@ -38,9 +38,8 @@
     </div>
 </nav>
 <h2 class="h2">Patient List</h2>
-<div style="width: 90%; overflow-x: auto;">
-    <table class="table" style="width: 40%;">
-        <thead>
+<table class="table" style="width: 60%; border-radius: 10px;">
+    <thead class="thead-dark" style="border-radius: 25px">
         <tr>
             <th style="text-align: center">Id</th>
             <th style="text-align: center">Name</th>
@@ -77,8 +76,27 @@
         background: linear-gradient(to right, rgba(193, 199, 203, 0.35), #afb5c0);
         font-family: 'Roboto', sans-serif;
     }
-    .table {
-        background: #dddddd;
+    table {
+        border-collapse:collapse;
+        border:none;
+        border-radius:10px;
+        margin-top: 25px;
+        margin-left: 40vh;
+        background: rgba(255, 255, 255, 0.95);
+    }
+
+    td, th {
+        border-left:none;
+        border-top:none;
+    }
+
+    th {
+        background-color: blue;
+        border-top: none;
+    }
+
+    td:first-child, th:first-child {
+        border-left: none;
     }
 
     .h2 {
@@ -90,12 +108,6 @@
         margin-left: 25%;
     }
 
-    .table {
-        margin-top: 25px;
-        margin-left: 65vh;
-        border: 1px solid #ffffff;
-        border-collapse: collapse;
-    }
 
 
 

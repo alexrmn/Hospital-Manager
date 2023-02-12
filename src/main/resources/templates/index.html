@@ -24,43 +24,89 @@
             <h1 class="display-4">Welcome to Hospital Manager</h1>
             <h2 class="display-4">Admin</h2>
             <hr class="my-4">
-            <div class="d-flex1 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" href="/admin/createAdmin" role="button">Create Admin User</a>
-                <a class="btn btn-primary btn-lg mb-2" href="/mvc/doctor/createDoctor" role="button">Create Doctor</a>
-            </div>
-            <div class="d-flex2 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" href="/mvc/patient/viewAll" role="button">View All Patients</a>
-                <a class="btn btn-primary btn-lg mb-2" href="/admin/viewAllAdmins" role="button">View All Admins</a>
-                <a class="btn btn-primary btn-lg mb-2" href="/mvc/doctor/viewAll" role="button">View All Doctors</a>
-            </div>
-            <div class="d-flex3 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" style="background: #00c8b7" href="/diagnose/createDiagnose" role="button">Create Diagnose</a>
-                <a class="btn btn-primary btn-lg mb-2" style="background: #00c8b7" href="/diagnose/viewAllDiagnoses" role="button">View All Diagnoses</a>
-            </div>
-            <div class="d-flex4 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" style="background: #2e6da4" href="/procedure/createProcedure" role="button">Create Procedure</a>
-                <a class="btn btn-primary btn-lg mb-2" style="background: #2e6da4" href="/procedure/viewAllProcedure" role="button">View All Procedures</a>
-            </div>
-            <div class="d-flex5 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" style="background: #31b0d5" href="/medication/createMedication" role="button">Create Medication</a>
-                <a class="btn btn-primary btn-lg mb-2" style="background: #31b0d5" href="/medication/viewAllMedication" role="button">View All Medications</a>
-            </div>
-            <div class="d-flex5 justify-content-center">
-                <a class="btn btn-primary btn-lg mb-2" style="background: #31b0d5" href="/specialty/createSpecialty" role="button">Create Specialty</a>
-                <a class="btn btn-primary btn-lg mb-2" style="background: #31b0d5" href="/specialty/viewAllSpecialties" role="button">View All Specialties</a>
-            </div>
-        </div>
+            <table>
+                <tr>
+                    <td>
+                        <a style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2" href="/admin/createAdmin" role="button">Create Admin User</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2" href="/admin/viewAllAdmins" role="button">View All Admins</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a  style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2" href="/mvc/doctor/createDoctor" role="button">Create Doctor</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2" href="/mvc/doctor/viewAll" role="button">View All Doctors</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2" href="/mvc/patient/create" role="button">Create Patient</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2" href="/mvc/patient/viewAll" role="button">View All Patients</a>
+                    </td>
+
+                <tr>
+                    <td>
+                        <a  style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2"  href="/diagnose/createDiagnose" role="button">Create Diagnose</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2"  href="/diagnose/viewAllDiagnoses" role="button">View All Diagnoses</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a  style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2" href="/procedure/createProcedure" role="button">Create Procedure</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2"  href="/procedure/viewAllProcedure" role="button">View All Procedures</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a  style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2"  href="/medication/createMedication" role="button">Create Medication</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2" href="/medication/viewAllMedication" role="button">View All Medications</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a  style="background-color: #6a64f1" class="btn btn-primary btn-lg mb-2" href="/specialty/createSpecialty" role="button">Create Specialty</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-lg mb-2" href="/specialty/viewAllSpecialties" role="button">View All Specialties</a>
+                    </td>
+                </tr>
+            </table>
+</div>
     </div>
 </div>
 <style>
+    table {
+        width: 100%;
+        text-align: center;
+    }
+
+    td {
+        width: 50%;
+    }
+
+    a.btn {
+        width: 250px;
+        height: 50px;
+        display: inline-block;
+    }
     .btn {
         border: none;
     }
 
-    a.btn:hover {
-        background-color: #00b7c8;
-        color: white;
-    }
+  a:hover{
+      background-color: #d0a2b2;
+  }
 
 </style>
 
