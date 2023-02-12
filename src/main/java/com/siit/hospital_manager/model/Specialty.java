@@ -2,6 +2,7 @@ package com.siit.hospital_manager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Specialty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     private String name;
 
     @OneToMany(mappedBy = "specialty")
@@ -27,9 +29,11 @@ public class Specialty {
     private List<Doctor> doctors;
 
     @Column(length = 1000)
+    @NotBlank
     private String description;
 
     @Column(length = 1000)
+    @NotBlank
     private String imageURL;
 
 

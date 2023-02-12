@@ -100,4 +100,14 @@ public class Appointment {
         }
         this.medications.add(medication);
     }
+
+    public void removeMedication(Medication medication) {
+        this.medications.remove(medication);
+        medication.getAppointments().remove(this);
+    }
+
+    public void removeProcedure(Procedure procedure) {
+        this.procedures.remove(procedure);
+        procedure.getAppointments().remove(this);
+    }
 }

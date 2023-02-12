@@ -4,10 +4,12 @@ import com.siit.hospital_manager.model.Diagnosis;
 import com.siit.hospital_manager.repository.DiagnosisRepository;
 import com.siit.hospital_manager.repository.PatientRepository;
 import com.siit.hospital_manager.service.DiagnosisService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -37,8 +39,11 @@ public class DiagnosisController {
     }
 
      @PostMapping("/submitCreateDiagnose")
-    public String createDiagnose(String name) {
-         try {
+    public String createDiagnose(@Valid String name, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "entityExistsError";
+        }
+        try {
              diagnosisService.createDiagnose(name);
              return "redirect:/diagnose/viewAllDiagnoses";
          } catch (ResponseStatusException e)
