@@ -49,7 +49,7 @@ public class HomePageController {
     @GetMapping("/indexUser")
     public String indexUser(Model model){
         model.addAttribute("specialties", specialtyService.findAll());
-        return "indexUser";
+        return "indexUser2";
     }
 
 //    @GetMapping("/dashboard")

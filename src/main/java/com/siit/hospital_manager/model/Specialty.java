@@ -29,6 +29,9 @@ public class Specialty {
     @Column(length = 1000)
     private String description;
 
+    @Column(length = 1000)
+    private String imageURL;
+
 
     @Override
     public String toString() {
