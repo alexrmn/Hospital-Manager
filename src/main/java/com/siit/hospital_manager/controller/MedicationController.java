@@ -9,9 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.w3c.dom.stylesheets.LinkStyle;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/medication")
