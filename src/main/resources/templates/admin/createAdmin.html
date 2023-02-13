@@ -1,3 +1,51 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Create Admin</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
+<!--</head>-->
+<!--<body>-->
+<!--<nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">-->
+<!--    <a class="navbar-brand" href="/">Hospital Manager</a>-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"-->
+<!--            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--        <ul class="navbar-nav">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/">Home</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/logout">Log Out</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--<div class="w-50 mx-auto content-between-l">-->
+<!--    <br/>-->
+<!--    <h2>Create Admin</h2>-->
+<!--    <div>-->
+<!--        <form th:object="${admin}" th:action="@{/admin/submitCreateAdmin}" method="post">-->
+<!--            <div class="mb-1 w-75 p-3">-->
+<!--                <label class="form-label" for="userName">UserName:</label>-->
+<!--                <input class="form-control" type="text" id="userName" th:field="*{userName}" required/>-->
+<!--            </div>-->
+<!--            <div class="mb-1 w-75 p-3">-->
+<!--                <label class="form-label" for="userName">Password:</label>-->
+<!--                <input class="form-control" type="password" id="password" th:field="*{password}" required/>-->
+<!--            </div>-->
+<!--            <div class="w-75 p-3 text-end">-->
+<!--                <input type="submit" value="Submit" class="btn btn-primary "/>-->
+<!--                <br>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +53,7 @@
     <title>Create Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-expand-sm navbar-light bg-light">
@@ -24,26 +73,149 @@
         </ul>
     </div>
 </nav>
-<div class="w-50 mx-auto content-between-l">
-    <br/>
-    <h2>Create Admin</h2>
-    <div>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+
+
         <form th:object="${admin}" th:action="@{/admin/submitCreateAdmin}" method="post">
-            <div class="mb-1 w-75 p-3">
+            <div class="formbold-form-title">
+                <h2 class="">Create Admin</h2>
+            </div>
+            <div class="formbold-mb-3">
                 <label class="form-label" for="userName">UserName:</label>
                 <input class="form-control" type="text" id="userName" th:field="*{userName}" required/>
             </div>
-            <div class="mb-1 w-75 p-3">
+            <div class="formbold-mb-3">
                 <label class="form-label" for="userName">Password:</label>
                 <input class="form-control" type="password" id="password" th:field="*{password}" required/>
             </div>
-            <div class="w-75 p-3 text-end">
-                <input type="submit" value="Submit" class="btn btn-primary "/>
-                <br>
-            </div>
+            <button class="formbold-btn">Create Admin</button>
         </form>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script>
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+    }
+    .form-control{
+        height: 25px;
+        text-align: center;
+    }
+    form-control-input{
+        height:55px;
+    }
+    .formbold-mb-3 {
+        margin-bottom: 15px;
+    }
+    .formbold-mb-3 select{
+        height: 40px;
+        width: 100%;
+        text-align: center;
+    }
+    .formbold-mb-3 input{
+        height: 40px;
+        width: 100%;
+        text-align: center;
+    }
+
+    #supportCheckbox:checked ~ div span {
+        opacity: 1;
+    }
+
+    .formbold-main-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+    }
+
+
+    .formbold-form-wrapper {
+        margin: 0 auto;
+        max-width: 570px;
+        width: 100%;
+        background: white;
+        padding: 40px;
+    }
+
+
+
+    .formbold-form-title {
+        margin-bottom: 30px;
+    }
+    .formbold-form-title h2 {
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 34px;
+        color: #07074d;
+    }
+    .formbold-form-title p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #536387;
+        margin-top: 12px;
+    }
+    .form-control{
+        width: 100%;
+        height: 25px;
+        font-size: 19px;
+    }
+
+    .formbold-input-flex > div {
+        width: 50%;
+    }
+
+
+    .formbold-form-label {
+        color: #536387;
+        font-size: 25px;
+        line-height: 24px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+
+    .formbold-checkbox-label a {
+        margin-left: 5px;
+        color: #6a64f1;
+    }
+
+
+    .formbold-btn {
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 14px 25px;
+        border: none;
+        font-weight: 500;
+        background-color: #6a64f1;
+        color: white;
+        cursor: pointer;
+        margin-top: 25px;
+    }
+    .formbold-btn:hover {
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+    }
+</style>
+
+
 </body>
 </html>
 

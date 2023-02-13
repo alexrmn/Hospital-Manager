@@ -17,7 +17,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/diagnose")
-
 @RequiredArgsConstructor
 public class DiagnosisController {
 
@@ -39,10 +38,7 @@ public class DiagnosisController {
     }
 
      @PostMapping("/submitCreateDiagnose")
-    public String createDiagnose(@Valid String name, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "entityExistsError";
-        }
+    public String createDiagnose(@Valid String name) {
         try {
              diagnosisService.createDiagnose(name);
              return "redirect:/diagnose/viewAllDiagnoses";
