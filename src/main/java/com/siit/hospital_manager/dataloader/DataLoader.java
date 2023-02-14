@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
