@@ -33,11 +33,9 @@ public class Appointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id", nullable = false)
-    @JsonIgnore
     private Doctor doctor;
 
     @ManyToOne
-    @JsonIgnore
     private Specialty specialty;
 
     @ManyToMany()

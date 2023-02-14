@@ -89,6 +89,7 @@ public class AppointmentService {
                 .patient(patient)
                 .date(createAppointmentDto.getDate())
                 .doctor(createAppointmentDto.getDoctor())
+                .specialty(createAppointmentDto.getDoctor().getSpecialty())
                 .build();
 
         appointmentsRepository.save(appointment);
