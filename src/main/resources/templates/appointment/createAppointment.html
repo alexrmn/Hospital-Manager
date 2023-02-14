@@ -69,6 +69,18 @@
     $(function () {
         $('#datetimepicker1').datetimepicker();
     });
+    const dateInput = document.getElementById('date');
+    const now = new Date();
+
+    dateInput.addEventListener('input', function() {
+        const selectedDate = new Date(dateInput.value);
+
+        if (selectedDate < now) {
+            dateInput.setCustomValidity('Please enter a date in the present or future.');
+        } else {
+            dateInput.setCustomValidity('');
+        }
+    });
 </script>
 
 <style>

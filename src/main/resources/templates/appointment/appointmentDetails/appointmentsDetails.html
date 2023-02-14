@@ -82,8 +82,7 @@
                 </td>
                 <td width="60%" valign="top">
                     <span style="font-size: 3em;">Summary</span>
-                    <hr />
-                        <h4 class="form-control" id="summary" th:text="*{appointment.summary}"></h4>
+                        <textarea class="form-control" id="summary" th:text="*{appointment.summary}" readonly rows="10"></textarea>
                 </td>
             </tr>
             </tbody>
