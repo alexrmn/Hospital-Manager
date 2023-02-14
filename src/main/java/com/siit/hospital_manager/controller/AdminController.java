@@ -62,14 +62,10 @@ public class AdminController {
 
     @GetMapping("/show-statistics")
     public String showStatistics(Model model) {
-        Map<Specialty, Integer> statistics = statisticsService.getNumberOfAppointmentsPerSpecialty();
-
-        List<Specialty> specialties = new ArrayList<>(statistics.keySet());
-        List<Integer> appointments = new ArrayList<>(statistics.values());
-
-        model.addAttribute("specialties", specialties);
-        model.addAttribute("appointments", appointments);
-
+        Map<Specialty, Integer> statisticsMap = statisticsService.getNumberOfAppointmentsPerSpecialty();
+        Map<String, Integer> statistics = new HashMap<>();
+        statisticsMap.forEach(((specialty, integer) -> statistics.put(specialty.getName(), integer)));
+        model.addAttribute("statistics",statistics);
         return "admin/showStatistics";
     }
 

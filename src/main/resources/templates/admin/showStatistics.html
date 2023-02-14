@@ -1,47 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Statistics</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <meta charset="ISO-8859-1" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+
 </head>
 <body>
+<div class="container">
+    <h2 align="center">Statistics</h2>
 
-
-<div class="bar-chart">
-    <div th:each="specialty, i : ${specialties}"
-         th:style="'height: ' + ${appointments[i]}*10 + 'px'">
-        <span th:text="${specialty.name}"></span>
-        <span th:text="${appointments[i]}"></span>
-    </div>
+    <div id="container"
+         style="width: 550px; height: 400px; margin: 0 auto"></div>
 </div>
-
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script th:inline="javascript">
+    $(function(){
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Number of Appointments per Specialty'
+            },
+            xAxis: {
+                categories: [[${statistics.keySet()}]],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max:10,
+                title: {
+                    text: 'Number of Appointments'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Specialties',
+                data: [[${statistics.values()}]]
+            }]
+        });
+    });
+</script>
 
 </body>
 <style>
-    .bar-chart {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        height: 300px;
-        background-color: #F1F1F1;
-        padding: 20px;
-        box-sizing: border-box;
-    }
-    .bar-chart > div {
-        flex: 1;
-        margin: 0 10px;
-        background-color: #007BFF;
-        color: #fff;
-        font-size: 14px;
-        text-align: center;
-        line-height: 30px;
-        transition: all 0.3s ease;
-    }
-    .bar-chart > div:hover {
-        background-color: #0069D9;
-    }
+.container {
+    margin-top: 150px;
+}
 </style>
 </html>
-
-
