@@ -161,7 +161,76 @@
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
     }
 </style>
+<script>
+    const form = document.querySelector('form');
+    const userNameInput = document.getElementById('userName');
+    const passwordInput = document.getElementById('password');
+    const nameInput = document.getElementById('name');
+    const ageInput = document.getElementById('age');
+    const phoneNumberInput = document.getElementById('phoneNumber');
+    const emailInput = document.getElementById('email');
 
+    const namePattern = /^[A-Z][a-z]* [A-Z][a-z]*$/;
+    const phoneNumberPattern = /^0[0-9]{9}$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const inputFields = [userNameInput, passwordInput, nameInput, ageInput, phoneNumberInput, emailInput];
+    for (let i = 0; i < inputFields.length; i++) {
+        inputFields[i].addEventListener('input', (event) => {
+            const field = event.target;
+            let hasError = false;
+
+            if (!field.checkValidity()) {
+                field.classList.add('is-invalid');
+                hasError = true;
+            } else {
+                field.classList.remove('is-invalid');
+            }
+
+            if (field === nameInput) {
+                if (!namePattern.test(nameInput.value)) {
+                    nameInput.setCustomValidity('Please enter your first and last name separated by a space with the first letter of each name capitalized');
+                    nameInput.classList.add('is-invalid');
+                    hasError = true;
+                } else {
+                    nameInput.setCustomValidity('');
+                    nameInput.classList.remove('is-invalid');
+                }
+            } else if (field === ageInput) {
+                const age = parseInt(ageInput.value);
+                if (age < 15 || age > 99) {
+                    ageInput.setCustomValidity('Please enter an age between 15 and 99');
+                    ageInput.classList.add('is-invalid');
+                    hasError = true;
+                } else {
+                    ageInput.setCustomValidity('');
+                    ageInput.classList.remove('is-invalid');
+                }
+            } else if (field === phoneNumberInput) {
+                if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+                    phoneNumberInput.setCustomValidity('Please enter a valid phone number starting with 0 and containing 10 digits');
+                    phoneNumberInput.classList.add('is-invalid');
+                    hasError = true;
+                } else {
+                    phoneNumberInput.setCustomValidity('');
+                    phoneNumberInput.classList.remove('is-invalid');
+                }
+            } else if (field === emailInput) {
+                if (!emailPattern.test(emailInput.value)) {
+                    emailInput.setCustomValidity('Please enter a valid email address');
+                    emailInput.classList.add('is-invalid');
+                    hasError = true;
+                } else {
+                    emailInput.setCustomValidity('');
+                    emailInput.classList.remove('is-invalid');
+                }
+            }
+            if (hasError) {
+                event.preventDefault();
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
