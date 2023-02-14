@@ -62,6 +62,7 @@ public class Appointment {
     )
     private Set<Medication> medications;
 
+    @Column(length = 2000)
     private String summary;
 
     public AppointmentDto toDto(){

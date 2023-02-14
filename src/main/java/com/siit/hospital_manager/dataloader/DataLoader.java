@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -62,20 +62,20 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                         "laparoscopic procedures.")
                 .imageURL("https://i.ibb.co/jZGz5bh/general-surgery.png")
                 .build();
-        Specialty neurology = Specialty.builder()
-                .id(4)
-                .name("Neurology")
-                .description("Neurology is the branch of medicine dealing with the diagnosis and treatment of all categories of conditions and disease involving the" +
-                        " brain, the spinal cord and the peripheral nerves. " +
-                        "Neurological practice relies heavily on the field of neuroscience, the scientific study of the nervous system. " +
-                        "A neurologist is a physician specializing in neurology and trained to investigate, diagnose and treat neurological disorders.")
-                .imageURL("https://i.ibb.co/wc5BxM2/neurology.png")
-                .build();
+//        Specialty neurology = Specialty.builder()
+//                .id(4)
+//                .name("Neurology")
+//                .description("Neurology is the branch of medicine dealing with the diagnosis and treatment of all categories of conditions and disease involving the" +
+//                        " brain, the spinal cord and the peripheral nerves. " +
+//                        "Neurological practice relies heavily on the field of neuroscience, the scientific study of the nervous system. " +
+//                        "A neurologist is a physician specializing in neurology and trained to investigate, diagnose and treat neurological disorders.")
+//                .imageURL("https://i.ibb.co/wc5BxM2/neurology.png")
+//                .build();
 
         specialtyRepository.save(cardiology);
         specialtyRepository.save(rheumatology);
         specialtyRepository.save(generalSurgery);
-        specialtyRepository.save(neurology);
+//        specialtyRepository.save(neurology);
 
         //creating doctors
         Doctor doctor1 = Doctor.builder()
@@ -111,7 +111,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .isActive(true)
                 .roles("ROLE_DOCTOR")
                 .name("Michael Andrew")
-                .specialty(neurology)
+                .specialty(cardiology)
                 .build();
 
         doctorRepository.save(doctor1);
@@ -129,7 +129,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .name("Will Smith")
                 .age(33)
                 .phoneNumber("0752111222")
-                .email("patient1@mail.com")
+                .email("roman.alex.93@gmail.com")
                 .build();
 
         Patient patient2 = Patient.builder()
@@ -165,8 +165,18 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .name("X-Ray")
                 .build();
 
+        Procedure bloodTests = Procedure.builder()
+                .name("Blood Tests")
+                .build();
+
+        Procedure ecg = Procedure.builder()
+                .name("ECG")
+                .build();
+
         procedureRepository.save(eco);
         procedureRepository.save(xRay);
+        procedureRepository.save(bloodTests);
+        procedureRepository.save(ecg);
 
         //creating Diagnoses
         Diagnosis diagnosis1 = Diagnosis.builder()
@@ -177,15 +187,31 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .name("Lupus")
                 .build();
 
+        Diagnosis diagnosis3 = Diagnosis.builder()
+                .name("Atrial Fibrillation")
+                .build();
+
+        Diagnosis diagnosis4 = Diagnosis.builder()
+                .name("Appendicitis")
+                .build();
+
+
         diagnosisRepository.save(diagnosis1);
         diagnosisRepository.save(diagnosis2);
+        diagnosisRepository.save(diagnosis3);
+        diagnosisRepository.save(diagnosis4);
 
         //creating Medications
         Medication enalapril = Medication.builder()
                 .name("Enalapril")
                 .build();
 
+        Medication adrenaline = Medication.builder()
+                .name("Adrenaline")
+                .build();
+
         medicationRepository.save(enalapril);
+        medicationRepository.save(adrenaline);
 
 
         //creating appointments
@@ -193,13 +219,23 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         diagnosisSet.add(diagnosis1);
         diagnosisSet.add(diagnosis2);
 
+        Set<Procedure> procedureSet = new HashSet<>();
+        procedureSet.add(ecg);
+        procedureSet.add(eco);
+
         Appointment appointment = Appointment.builder()
                 .date(LocalDateTime.now())
                 .patient(patient1)
                 .doctor(doctor1)
-                .diagnoses(diagnosisSet)
+                .specialty(cardiology)
+                .summary("33 year old male presenting with chest pain and shortness of breath. " +
+                        "/n Physical exam finds: Arterial hypertension, irregular heart beat" +
+                        "/n Ecg shows atrial fibrillation" +
+                        "/n Echocardiography shows reduced ejection fraction" +
+                        "/n Recommendations: Eliquis 5mg 1-0-0, Checkup in 1 month")
                 .build();
 
+//        appointmentsRepository.save(appointment);
 
     }
 }
