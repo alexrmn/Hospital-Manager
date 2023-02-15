@@ -2,10 +2,12 @@ package com.siit.hospital_manager.service;
 
 import com.siit.hospital_manager.exception.BusinessException;
 import com.siit.hospital_manager.model.Doctor;
+import com.siit.hospital_manager.model.Patient;
 import com.siit.hospital_manager.model.Specialty;
 import com.siit.hospital_manager.model.dto.CreateDoctorDto;
 import com.siit.hospital_manager.model.dto.DoctorDto;
 import com.siit.hospital_manager.repository.DoctorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,4 +59,10 @@ public class DoctorService {
     public List<Doctor> findAllBySpecialty(Specialty specialty) {
         return doctorRepository.findAllBySpecialty(specialty);
     }
+
+    public Doctor findByUsername(String username) {
+        return doctorRepository.findByUserName(username)
+                .orElseThrow(() -> new EntityNotFoundException("Doctor not found"));
+    }
+
 }
