@@ -1,12 +1,15 @@
 package com.siit.hospital_manager.controller;
 
 
+import com.siit.hospital_manager.config.MyUserDetails;
 import com.siit.hospital_manager.service.SpecialtyService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -29,7 +32,6 @@ public class HomePageController {
         }
         return "login";
     }
-
 
     @GetMapping("/default")
     public String successPage(HttpServletRequest request){
