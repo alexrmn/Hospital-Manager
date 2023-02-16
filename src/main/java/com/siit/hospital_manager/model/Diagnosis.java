@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,5 +34,12 @@ public class Diagnosis {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void addAppointment(Appointment appointment){
+        if (this.appointments == null) {
+            this.appointments = new ArrayList<>();
+        }
+        this.appointments.add(appointment);
     }
 }

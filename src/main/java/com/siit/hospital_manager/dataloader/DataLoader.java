@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,6 +80,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //creating doctors
         Doctor doctor1 = Doctor.builder()
+                .id(1)
                 .userName("doctor1")
                 .password(encoder.encode("doctor1"))
                 .isActive(true)
@@ -88,6 +90,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Doctor doctor2 = Doctor.builder()
+                .id(2)
                 .userName("doctor2")
                 .password(encoder.encode("doctor2"))
                 .isActive(true)
@@ -97,6 +100,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Doctor doctor3 = Doctor.builder()
+                .id(3)
                 .userName("doctor3")
                 .password(encoder.encode("doctor3"))
                 .isActive(true)
@@ -106,6 +110,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Doctor doctor4 = Doctor.builder()
+                .id(4)
                 .userName("doctor4")
                 .password(encoder.encode("doctor4"))
                 .isActive(true)
@@ -122,6 +127,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //creating patients
         Patient patient1 = Patient.builder()
+                .id(5)
                 .userName("patient1")
                 .password(encoder.encode("patient1"))
                 .isActive(true)
@@ -133,6 +139,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .build();
 
         Patient patient2 = Patient.builder()
+                .id(6)
                 .userName("patient2")
                 .password(encoder.encode("patient2"))
                 .isActive(true)
@@ -148,6 +155,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         //creating admin
         Admin admin = Admin.builder()
+                .id(7)
                 .userName("admin")
                 .password(encoder.encode("admin"))
                 .isActive(true)
@@ -179,27 +187,43 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         procedureRepository.save(ecg);
 
         //creating Diagnoses
-        Diagnosis diagnosis1 = Diagnosis.builder()
+        Diagnosis hypertension = Diagnosis.builder()
+                .id(1)
                 .name("Hypertension")
                 .build();
 
-        Diagnosis diagnosis2 = Diagnosis.builder()
+        Diagnosis lupus = Diagnosis.builder()
+                .id(2)
                 .name("Lupus")
                 .build();
 
-        Diagnosis diagnosis3 = Diagnosis.builder()
+        Diagnosis atrialFibrillation = Diagnosis.builder()
+                .id(3)
                 .name("Atrial Fibrillation")
                 .build();
 
-        Diagnosis diagnosis4 = Diagnosis.builder()
+        Diagnosis appendicitis = Diagnosis.builder()
+                .id(4)
                 .name("Appendicitis")
                 .build();
 
+        Diagnosis atrialFlutter = Diagnosis.builder()
+                .id(5)
+                .name("Atrial Flutter")
+                .build();
 
-        diagnosisRepository.save(diagnosis1);
-        diagnosisRepository.save(diagnosis2);
-        diagnosisRepository.save(diagnosis3);
-        diagnosisRepository.save(diagnosis4);
+        Diagnosis cholecystitis = Diagnosis.builder()
+                .id(6)
+                .name("Cholecystitis")
+                .build();
+
+
+        diagnosisRepository.save(hypertension);
+        diagnosisRepository.save(lupus);
+        diagnosisRepository.save(atrialFibrillation);
+        diagnosisRepository.save(appendicitis);
+        diagnosisRepository.save(atrialFlutter);
+        diagnosisRepository.save(cholecystitis);
 
         //creating Medications
         Medication enalapril = Medication.builder()
@@ -210,32 +234,110 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .name("Adrenaline")
                 .build();
 
+        Medication lidocaine = Medication.builder()
+                .name("Lidocaine")
+                .build();
+
+        Medication amiodarone = Medication.builder()
+                .name("Amiodarone")
+                .build();
+
+        Medication ibuprofen = Medication.builder()
+                .name("Ibuprofen")
+                .build();
+
         medicationRepository.save(enalapril);
         medicationRepository.save(adrenaline);
-
+        medicationRepository.save(lidocaine);
+        medicationRepository.save(amiodarone);
+        medicationRepository.save(ibuprofen);
 
         //creating appointments
-        Set<Diagnosis> diagnosisSet = new HashSet<>();
-        diagnosisSet.add(diagnosis1);
-        diagnosisSet.add(diagnosis2);
 
-        Set<Procedure> procedureSet = new HashSet<>();
-        procedureSet.add(ecg);
-        procedureSet.add(eco);
-
-        Appointment appointment = Appointment.builder()
+        Appointment appointment1 = Appointment.builder()
                 .date(LocalDateTime.now())
                 .patient(patient1)
                 .doctor(doctor1)
                 .specialty(cardiology)
                 .summary("33 year old male presenting with chest pain and shortness of breath. " +
-                        "/n Physical exam finds: Arterial hypertension, irregular heart beat" +
-                        "/n Ecg shows atrial fibrillation" +
-                        "/n Echocardiography shows reduced ejection fraction" +
-                        "/n Recommendations: Eliquis 5mg 1-0-0, Checkup in 1 month")
+                        "Physical exam finds: Arterial hypertension, irregular heart beat. " +
+                        "Ecg shows atrial fibrillation. " +
+                        "Echocardiography shows reduced ejection fraction. " +
+                        "Recommendations: Eliquis 5mg 1-0-0, Checkup in 1 month")
+                .build();
+        appointment1.addDiagnosis(hypertension);
+        hypertension.addAppointment(appointment1);
+        appointmentsRepository.save(appointment1);
+        diagnosisRepository.save(hypertension);
+
+        Appointment appointment2 = Appointment.builder()
+                .date(LocalDateTime.of(2020, Month.APRIL, 16, 7, 30))
+                .patient(patient1)
+                .doctor(doctor1)
+                .specialty(cardiology)
+                .summary("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
+                        "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                        " laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate " +
+                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt " +
+                        "in culpa qui officia deserunt mollit anim id est laborum.")
                 .build();
 
-//        appointmentsRepository.save(appointment);
+        appointment2.addDiagnosis(atrialFibrillation);
+        appointment2.addDiagnosis(hypertension);
+        atrialFibrillation.addAppointment(appointment2);
+        hypertension.addAppointment(appointment2);
+
+        Appointment appointment3 = Appointment.builder()
+                .date(LocalDateTime.of(2020, Month.APRIL, 16, 10, 30))
+                .patient(patient2)
+                .doctor(doctor2)
+                .specialty(doctor2.getSpecialty())
+                .summary("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
+                        "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                        " laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate " +
+                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt " +
+                        "in culpa qui officia deserunt mollit anim id est laborum.")
+                .build();
+
+        appointment3.addDiagnosis(lupus);
+        lupus.addAppointment(appointment3);
+        appointmentsRepository.save(appointment3);
+        diagnosisRepository.save(lupus);
+
+        Appointment appointment4 = Appointment.builder()
+                .date(LocalDateTime.of(2022, Month.APRIL, 16, 12, 30))
+                .patient(patient1)
+                .doctor(doctor1)
+                .specialty(cardiology)
+                .summary("33 year old male presenting with chest pain and shortness of breath. " +
+                        "Physical exam finds: Arterial hypertension, irregular heart beat. " +
+                        "Ecg shows atrial fibrillation. " +
+                        "Echocardiography shows reduced ejection fraction. " +
+                        "Recommendations: Eliquis 5mg 1-0-0, Checkup in 1 month")
+                .build();
+        appointment4.addDiagnosis(hypertension);
+        hypertension.addAppointment(appointment4);
+        appointmentsRepository.save(appointment4);
+        diagnosisRepository.save(hypertension);
+
+        Appointment appointment5 = Appointment.builder()
+                .date(LocalDateTime.of(2021, Month.JULY, 24, 10, 30))
+                .patient(patient2)
+                .doctor(doctor2)
+                .specialty(doctor2.getSpecialty())
+                .summary("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
+                        "ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco" +
+                        " laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate " +
+                        "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt " +
+                        "in culpa qui officia deserunt mollit anim id est laborum.")
+                .build();
+
+        appointment5.addDiagnosis(lupus);
+        lupus.addAppointment(appointment5);
+        appointmentsRepository.save(appointment5);
+        diagnosisRepository.save(lupus);
+
+
 
     }
 }
